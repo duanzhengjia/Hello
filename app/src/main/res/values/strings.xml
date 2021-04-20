@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Hello</string>
+    <string name="money">type RMB</string>
+    <string name="result">HELLO</string>
+    <string name="dollar">dollar</string>
+    <string name="pound">pound</string>
+    <string name="won">won</string>
+</resources>
