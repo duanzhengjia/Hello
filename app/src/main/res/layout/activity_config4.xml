@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfigActivity4">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="438dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_dollar"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_margin="15dp"
+            android:inputType="numberDecimal"
+           android:hint="@string/dollar" />
+
+        <EditText
+            android:id="@+id/edit_euro"
+            android:layout_width="match_parent"
+            android:layout_height="91dp"
+            android:gravity="center"
+            android:layout_margin="15dp"
+            android:inputType="numberDecimal"
+            android:hint="@string/euro"/>
+
+        <EditText
+            android:id="@+id/edit_won"
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:gravity="center"
+            android:layout_margin="15dp"
+            android:inputType="numberDecimal"
+            android:hint="@string/won"/>
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_margin="15dp"
+            android:text="Save"
+            android:onClick="save"/>
+    </LinearLayout>
+
+</LinearLayout>
