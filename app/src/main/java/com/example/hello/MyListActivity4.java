@@ -1,5 +1,7 @@
 package com.example.hello;
 
+import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,17 +14,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MyListActivity4 extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MyListActivity4 extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private static final  String TAG = "MyListActivity4";
     ListView listView;
-    //    private Handler handler1;
-//    private Handler handler2;
+    MyAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,40 +32,17 @@ public class MyListActivity4 extends AppCompatActivity implements AdapterView.On
         listView = findViewById(R.id.mylist);
         ProgressBar progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
-
-//        ArrayList<HashMap<String,String>> listItems = new ArrayList<HashMap<String, String>>();
-//        for (int i =0; i<10;i++){
-//            HashMap<String,String> map = new HashMap<String,String>();
-//            map.put("ItemTitle","Rate:"+i);
-//            map.put("ItemDetail","detail:"+i);
-//            listItems.add(map);
-//        }
-//
-//        SimpleAdapter listItemAdapter = new SimpleAdapter(this,listItems,
-//                R.layout.list_item,
-//                new String[]{"ItemTitle","ItemDetail"},
-//                new int[]{R.id.itemTitle,R.id.itemDetail});
-//        listView.setAdapter(listItemAdapter);
-//        listView.setVisibility(View.VISIBLE);
-
         listView.setOnItemClickListener(this);
-
         Handler handler = new Handler(){
             @Override
             public void handleMessage(@NonNull Message msg) {
                 if(msg.what==9){
                     ArrayList<HashMap<String,String>> listItems =(ArrayList<HashMap<String, String>>)msg.obj;
-//                    SimpleAdapter adapter = new SimpleAdapter(MyList3Activity.this,listItems,
-//                            R.layout.list_item,
-//                            new String[]{"ItemTitle","ItemDetail"},
-//                            new int[]{R.id.itemTitle,R.id.itemDetail});
-
-                    MyAdapter adapter =new MyAdapter(MyListActivity4.this,R.layout.list_item,listItems);
+                   // adapter =new RateAdapter(MyListActivity4.this,R.layout.list_item,(ArrayList<RateItem>)msg.obj);//方法的不同
+                    adapter =new MyAdapter(MyListActivity4.this,R.layout.list_item,(ArrayList<HashMap<String, String>>)msg.obj);
                     listView.setAdapter(adapter);
-
                     listView.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
-
                 }
                 super.handleMessage(msg);
             }
@@ -91,22 +70,34 @@ public class MyListActivity4 extends AppCompatActivity implements AdapterView.On
         String title2 = String.valueOf(title.getText());
         String detail2 = String.valueOf(detail.getText());
         Log.i(TAG,"onItemClick:title2="+title2);
-        Log.i(TAG,"onItemClick:detail2="+detail2);
+        Log.i(TAG,"onItemClick:detail2="+detail2);//去掉前缀
+//新添加
+          adapter.remove(fileList());
+//打开下一界面
+        Intent CalatorIntent=new Intent(this,Calator.class);
+        CalatorIntent.putExtra("title",titleStr);
+        CalatorIntent.putExtra("rate",detailStr);
+        startActivity(CalatorIntent);
 
-//        Message message1 = handler1.obtainMessage(1);
-//        message1.obj = title2;
-//        handler1.sendMessage(message1);
-//        Message message2 = handler2.obtainMessage(2);
-//        message2.obj = detail2;
-//        handler2.sendMessage(message2);
+    }
 
-//        Intent intent=new Intent(MyList3Activity.this,RatePiece.class);
-//        intent.setClass(MyList3Activity.this, RatePiece.class);
-//        intent.putExtra("title", title2);
-//        intent.putExtra("detail", detail2);
-//        MyList3Activity.this.startActivity(intent);
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.i(TAG,"onItemLongClick: 长按事件 position="+position);
+        MyListActivity4 item= (MyListActivity4) listView.getItemAtPosition(position);
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("提示")
+                .setMessage("请确认是否删除当前数据")
+                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.i(TAG,"onClick: 对话框事件处理");
+                        //删除数据项
+                        adapter.remove(fileList());
+                    }
+                }).setNegativeButton("否",null);
+                builder.create().show();
 
-
-
+                return true;
     }
 }
