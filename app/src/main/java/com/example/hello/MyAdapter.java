@@ -29,8 +29,6 @@ public class MyAdapter  extends ArrayAdapter {
         Map<String,String> map =(Map<String, String>)getItem(position);
         TextView title =(TextView) itemView.findViewById(R.id.itemTitle);
         TextView detail =(TextView) itemView.findViewById(R.id.itemDetail);
-
-
         title.setText(map.get("ItemTitle"));
         detail.setText(map.get("ItemDetail"));
 

@@ -3,6 +3,19 @@
     <string name="money">type RMB</string>
     <string name="result">HELLO</string>
     <string name="dollar">dollar</string>
-    <string name="pound">pound</string>
+    <string name="euro">euro</string>
     <string name="won">won</string>
+    <string name="btn3">+3 Button</string>
+    <string name="btn2">+2 Button</string>
+    <string name="btn1">+1 Button</string>
+    <string name="btn0">Reset</string>
+    <string name="textViewA">TeamA</string>
+    <string name="score1">score1</string>
+    <string name="btn3B">+3 Button</string>
+    <string name="btn2B">+2 Button</string>
+    <string name="btn1B">+1 Button</string>
+    <string name="score2">score2</string>
+    <string name="btn0B">Reset</string>
+    <string name="textViewB">TeamB</string>
+    <string name="buttonSave">Save</string>
 </resources>

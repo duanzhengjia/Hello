@@ -2,32 +2,48 @@ package com.example.hello;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 public class Calator extends AppCompatActivity  {
-    TextView titlepiece,resultpiece;
-    EditText inputpiece;
+    private  static  final String TAG="Calator";
     float rate;
-    String title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calator);
         Intent intent=getIntent();
-        title= intent.getStringExtra("title");
-        titlepiece=findViewById(R.id.self);
-        titlepiece.setText(title);
+        TextView title=findViewById(R.id.self);
+        EditText input=findViewById(R.id.chuandi);
+        TextView out=findViewById(R.id.result);
+
+        title.setText(intent.getStringExtra("title"));
+        rate = Float.parseFloat(intent.getStringExtra("rate"));
+        Log.i(TAG,"onCreate: rate="+rate);
+        input.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            //获取用户输入数据
+                String str=s.toString();
+                float r=Float.parseFloat(str)*(100/rate);
+                out.setText("result="+r);
+            }
+        });
+
     }
-    public void jisuan(View piece){
-        Intent intent=getIntent();
-        String rate1=intent.getStringExtra("detail");
-        rate=Float.parseFloat(String.valueOf(rate1));
-        inputpiece=findViewById(R.id.chuandi);
-        float input =Float.parseFloat(inputpiece.getText().toString());
-        float result=input*rate;
-        resultpiece=findViewById(R.id.button3);
-        resultpiece.setText(String.valueOf(result));
     }
-}
+

@@ -42,8 +42,6 @@ public class FirstlistActivity extends ListActivity implements Runnable {
                 super.handleMessage(msg);
             }
         };
-
-
   }
 
     @Override

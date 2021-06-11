@@ -38,12 +38,12 @@
         android:text="@string/dollar" />
 
     <Button
-        android:id="@+id/pound"
+        android:id="@+id/euro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:onClick="click"
-        android:text="@string/pound" />
+        android:text="euro" />
 
     <Button
         android:id="@+id/won"
@@ -52,4 +52,11 @@
         android:layout_marginBottom="30dp"
         android:onClick="click"
         android:text="@string/won" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openConfig"
+        android:text="config" />
 </LinearLayout>
